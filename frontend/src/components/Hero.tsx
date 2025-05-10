@@ -15,6 +15,7 @@ import {
   BookOpen,
   Bell
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const typewriterPhrases = [
   "Empowering Farmers",
@@ -92,20 +93,24 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-          <Button
-            variant="gradient"
-            size="lg"
-            className="text-lg px-8 py-6 hover:scale-105 transition-transform"
-          >
-            I'm a Farmer
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="text-lg px-8 py-6 hover:scale-105 transition-transform"
-          >
-            I'm a Buyer
-          </Button>
+          <Link to="/register?role=farmer">
+            <Button
+              variant="gradient"
+              size="lg"
+              className="text-lg px-8 py-6 hover:scale-105 transition-transform"
+            >
+              I'm a Farmer
+            </Button>
+          </Link>
+          <Link to="/register?role=consumer">
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-lg px-8 py-6 hover:scale-105 transition-transform"
+            >
+              I'm a Buyer
+            </Button>
+          </Link>
         </div>
 
         {/* Stats Bar */}
@@ -139,25 +144,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* What are you looking for? */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-sm mb-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">What are you looking for?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className="p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
-              <h3 className="font-medium text-gray-900">Sell my crops</h3>
-              <p className="text-sm text-gray-600">List your produce directly to buyers</p>
-            </button>
-            <button className="p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
-              <h3 className="font-medium text-gray-900">Buy fresh produce</h3>
-              <p className="text-sm text-gray-600">Get farm-fresh products at best prices</p>
-            </button>
-            <button className="p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
-              <h3 className="font-medium text-gray-900">Learn better techniques</h3>
-              <p className="text-sm text-gray-600">Access farming guides and tips</p>
-            </button>
-          </div>
-        </div>
-
         {/* Trust Icons */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <div className="flex items-center gap-2">
@@ -176,30 +162,6 @@ const Hero = () => {
             <FileText className="w-5 h-5 text-green-600" />
             <span className="text-sm text-gray-600">FSSAI-Compliant</span>
           </div>
-        </div>
-
-        {/* Quick Explore */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <Button variant="outline" className="flex items-center gap-2">
-            <Search className="w-4 h-4" />
-            Price Check
-          </Button>
-          <Button variant="outline" className="flex items-center gap-2">
-            <ShoppingBag className="w-4 h-4" />
-            Marketplace
-          </Button>
-          <Button variant="outline" className="flex items-center gap-2">
-            <MessageSquare className="w-4 h-4" />
-            Forum
-          </Button>
-          <Button variant="outline" className="flex items-center gap-2">
-            <Bot className="w-4 h-4" />
-            AI Assistant
-          </Button>
-          <Button variant="outline" className="flex items-center gap-2">
-            <BookOpen className="w-4 h-4" />
-            Guides
-          </Button>
         </div>
 
         {/* Tip of the Day */}

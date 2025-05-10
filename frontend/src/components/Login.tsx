@@ -26,26 +26,22 @@ const Login = ({ setUser }: LoginProps) => {
     e.preventDefault();
     setError('');
 
-    try {
-      const response = await fetch('http://localhost:5001/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      localStorage.setItem('token', data.token);
-      setUser(data.user);
+    // Mock login logic
+    if (
+      formData.email === 'test@example.com' &&
+      formData.password === 'password'
+    ) {
+      const mockUser = {
+        id: '1',
+        name: 'Test User',
+        email: 'test@example.com',
+        role: 'farmer',
+      };
+      localStorage.setItem('token', 'mock-token');
+      setUser(mockUser);
       navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.message);
+    } else {
+      setError('Invalid email or password. Try test@example.com / password');
     }
   };
 

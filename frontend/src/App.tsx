@@ -9,7 +9,8 @@ import FarmerDashboard from './components/FarmerDashboard';
 import ConsumerDashboard from './components/ConsumerDashboard';
 import Weather from './components/Weather';
 import Forum from './components/Forum';
-import AIFarmingAssistant from './components/AIFarmingAssistant';
+import AIAssistant from './components/AIAssistant';
+import Profile from './components/Profile';
 
 interface User {
   id: string;
@@ -81,13 +82,19 @@ const App = () => {
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="/forum" element={<Forum />} />
-          <Route path="/ai-assistant" element={<AIFarmingAssistant />} />
+          <Route path="/ai-assistant" element={<AIAssistant />} />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute allowedRoles={['farmer', 'consumer']}>
                 {user?.role === 'farmer' ? <FarmerDashboard /> : <ConsumerDashboard />}
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              user ? <Profile /> : <Navigate to="/login" />
             }
           />
         </Routes>

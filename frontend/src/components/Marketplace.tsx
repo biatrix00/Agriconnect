@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
 import { Slider } from './ui/slider';
@@ -30,13 +30,23 @@ const Marketplace = () => {
   const [sortBy, setSortBy] = useState('newest');
   const [cart, setCart] = useState<Product[]>([]);
   const [showCart, setShowCart] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % products.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Mock data - replace with actual API calls
   const products: Product[] = [
     {
       id: '1',
       name: 'Organic Wheat',
-      image: '/images/wheat.jpg',
+      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
       quantity: 1000,
       location: 'Punjab',
       price: 45,
@@ -48,7 +58,111 @@ const Marketplace = () => {
       description: 'Premium quality organic wheat, freshly harvested',
       transportOptions: ['Local Delivery', 'Self Pickup']
     },
-    // Add more mock products here
+    {
+      id: '2',
+      name: 'Basmati Rice',
+      image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 500,
+      location: 'Haryana',
+      price: 85,
+      seller: 'Priya Sharma',
+      isOrganic: true,
+      rating: 4.8,
+      isVerified: true,
+      harvestDate: '2024-02-20',
+      description: 'Premium quality basmati rice, perfect for biryani',
+      transportOptions: ['Express Delivery', 'Self Pickup']
+    },
+    {
+      id: '3',
+      name: 'Fresh Tomatoes',
+      image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 200,
+      location: 'Karnataka',
+      price: 35,
+      seller: 'Mohammed Iqbal',
+      isOrganic: false,
+      rating: 4.2,
+      isVerified: true,
+      harvestDate: '2024-03-10',
+      description: 'Fresh, juicy tomatoes from local farms',
+      transportOptions: ['Local Delivery', 'Express Delivery']
+    },
+    {
+      id: '4',
+      name: 'Organic Potatoes',
+      image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 300,
+      location: 'Uttar Pradesh',
+      price: 30,
+      seller: 'Amit Patel',
+      isOrganic: true,
+      rating: 4.6,
+      isVerified: true,
+      harvestDate: '2024-03-01',
+      description: 'Organic potatoes, perfect for all dishes',
+      transportOptions: ['Local Delivery', 'Self Pickup']
+    },
+    {
+      id: '5',
+      name: 'Fresh Onions',
+      image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 400,
+      location: 'Maharashtra',
+      price: 25,
+      seller: 'Sunita Desai',
+      isOrganic: false,
+      rating: 4.3,
+      isVerified: true,
+      harvestDate: '2024-03-05',
+      description: 'Fresh onions from local farms',
+      transportOptions: ['Local Delivery', 'Express Delivery']
+    },
+    {
+      id: '6',
+      name: 'Organic Cotton',
+      image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 100,
+      location: 'Gujarat',
+      price: 120,
+      seller: 'Rajesh Patel',
+      isOrganic: true,
+      rating: 4.7,
+      isVerified: true,
+      harvestDate: '2024-02-15',
+      description: 'Premium quality organic cotton',
+      transportOptions: ['Express Delivery', 'Self Pickup']
+    },
+    {
+      id: '7',
+      name: 'Fresh Sugarcane',
+      image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 150,
+      location: 'Uttar Pradesh',
+      price: 40,
+      seller: 'Rahul Singh',
+      isOrganic: false,
+      rating: 4.4,
+      isVerified: true,
+      harvestDate: '2024-03-12',
+      description: 'Fresh sugarcane, perfect for juice',
+      transportOptions: ['Local Delivery', 'Express Delivery']
+    },
+    {
+      id: '8',
+      name: 'Organic Millets',
+      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      quantity: 250,
+      location: 'Karnataka',
+      price: 95,
+      seller: 'Lakshmi Devi',
+      isOrganic: true,
+      rating: 4.9,
+      isVerified: true,
+      harvestDate: '2024-02-28',
+      description: 'Premium quality organic millets',
+      transportOptions: ['Express Delivery', 'Self Pickup']
+    }
   ];
 
   const cropTypes = ['Wheat', 'Rice', 'Tomatoes', 'Potatoes', 'Onions'];
@@ -83,6 +197,66 @@ const Marketplace = () => {
                 </span>
               )}
             </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Products Slider */}
+      <div className="max-w-7xl mx-auto mb-8 overflow-hidden">
+        <div className="relative">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="w-full flex-shrink-0 px-4"
+              >
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <div className="relative">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 object-cover"
+                    />
+                    {product.isOrganic && (
+                      <span className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
+                        Organic
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{product.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg font-bold text-gray-900">
+                        ₹{product.price}/kg
+                      </span>
+                      <Button
+                        variant="gradient"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+            {products.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full ${
+                  currentSlide === index ? 'bg-green-500' : 'bg-gray-300'
+                }`}
+                onClick={() => setCurrentSlide(index)}
+              />
+            ))}
           </div>
         </div>
       </div>
