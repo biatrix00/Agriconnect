@@ -12,6 +12,9 @@
     "concurrently": "^8.2.2"
   },
   "dependencies": {
-    "lucide-react": "^0.509.0"
+    "i18next": "^25.1.2",
+    "lucide-react": "^0.509.0",
+    "react-i18next": "^15.5.1",
+    "react-quill": "^2.0.0"
   }
 }

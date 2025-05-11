@@ -7,12 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { ShoppingCart, Plus, Filter, Star, Shield, Sparkles } from 'lucide-react';
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
-  image: string;
-  quantity: number;
+  images: string[];
+  quantity: string;
   location: string;
-  price: number;
+  price: string;
   seller: string;
   isOrganic: boolean;
   rating: number;
@@ -44,42 +44,48 @@ const Marketplace = () => {
   // Mock data - replace with actual API calls
   const products: Product[] = [
     {
-      id: '1',
-      name: 'Organic Wheat',
-      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 1000,
-      location: 'Punjab',
-      price: 45,
-      seller: 'Rajesh Kumar',
-      isOrganic: true,
-      rating: 4.5,
-      isVerified: true,
-      harvestDate: '2024-03-15',
-      description: 'Premium quality organic wheat, freshly harvested',
-      transportOptions: ['Local Delivery', 'Self Pickup']
-    },
-    {
-      id: '2',
-      name: 'Basmati Rice',
-      image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 500,
-      location: 'Haryana',
-      price: 85,
-      seller: 'Priya Sharma',
+      id: 1,
+      name: "Organic Wheat",
+      images: [
+        "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=500&q=60"
+      ],
+      quantity: "500 kg",
+      location: "Punjab",
+      price: "₹22/kg",
+      seller: "Amit Patel",
       isOrganic: true,
       rating: 4.8,
       isVerified: true,
-      harvestDate: '2024-02-20',
-      description: 'Premium quality basmati rice, perfect for biryani',
-      transportOptions: ['Express Delivery', 'Self Pickup']
+      harvestDate: "2024-05-10",
+      description: "High-quality organic wheat, freshly harvested.",
+      transportOptions: ["Pickup", "Delivery"]
+    },
+    {
+      id: 2,
+      name: "Basmati Rice",
+      images: [
+        "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=500&q=60"
+      ],
+      quantity: "300 kg",
+      location: "Haryana",
+      price: "₹40/kg",
+      seller: "Sunita Rao",
+      isOrganic: false,
+      rating: 4.5,
+      isVerified: true,
+      harvestDate: "2024-04-28",
+      description: "Premium Basmati rice, aromatic and long-grain.",
+      transportOptions: ["Delivery"]
     },
     {
       id: '3',
       name: 'Fresh Tomatoes',
-      image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 200,
+      images: [],
+      quantity: '200 kg',
       location: 'Karnataka',
-      price: 35,
+      price: '₹35/kg',
       seller: 'Mohammed Iqbal',
       isOrganic: false,
       rating: 4.2,
@@ -91,10 +97,10 @@ const Marketplace = () => {
     {
       id: '4',
       name: 'Organic Potatoes',
-      image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 300,
+      images: [],
+      quantity: '300 kg',
       location: 'Uttar Pradesh',
-      price: 30,
+      price: '₹30/kg',
       seller: 'Amit Patel',
       isOrganic: true,
       rating: 4.6,
@@ -106,10 +112,10 @@ const Marketplace = () => {
     {
       id: '5',
       name: 'Fresh Onions',
-      image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 400,
+      images: [],
+      quantity: '400 kg',
       location: 'Maharashtra',
-      price: 25,
+      price: '₹25/kg',
       seller: 'Sunita Desai',
       isOrganic: false,
       rating: 4.3,
@@ -121,10 +127,10 @@ const Marketplace = () => {
     {
       id: '6',
       name: 'Organic Cotton',
-      image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 100,
+      images: [],
+      quantity: '100 kg',
       location: 'Gujarat',
-      price: 120,
+      price: '₹120/kg',
       seller: 'Rajesh Patel',
       isOrganic: true,
       rating: 4.7,
@@ -136,10 +142,10 @@ const Marketplace = () => {
     {
       id: '7',
       name: 'Fresh Sugarcane',
-      image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 150,
+      images: [],
+      quantity: '150 kg',
       location: 'Uttar Pradesh',
-      price: 40,
+      price: '₹40/kg',
       seller: 'Rahul Singh',
       isOrganic: false,
       rating: 4.4,
@@ -151,10 +157,10 @@ const Marketplace = () => {
     {
       id: '8',
       name: 'Organic Millets',
-      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      quantity: 250,
+      images: [],
+      quantity: '250 kg',
       location: 'Karnataka',
-      price: 95,
+      price: '₹95/kg',
       seller: 'Lakshmi Devi',
       isOrganic: true,
       rating: 4.9,
@@ -215,11 +221,18 @@ const Marketplace = () => {
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                   <div className="relative">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-64 object-cover"
-                    />
+                    <div className="relative w-full h-48 mb-4">
+                      <div className="flex overflow-x-auto gap-2 h-full">
+                        {product.images.map((img, idx) => (
+                          <img
+                            key={idx}
+                            src={img}
+                            alt={product.name + ' image ' + (idx + 1)}
+                            className="h-48 w-64 object-cover rounded-lg border border-green-100 flex-shrink-0"
+                          />
+                        ))}
+                      </div>
+                    </div>
                     {product.isOrganic && (
                       <span className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
                         Organic
@@ -233,7 +246,7 @@ const Marketplace = () => {
                     <p className="text-gray-600 mb-4">{product.description}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-bold text-gray-900">
-                        ₹{product.price}/kg
+                        ₹{product.price}
                       </span>
                       <Button
                         variant="gradient"
@@ -383,11 +396,18 @@ const Marketplace = () => {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
             >
               <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative w-full h-48 mb-4">
+                  <div className="flex overflow-x-auto gap-2 h-full">
+                    {product.images.map((img, idx) => (
+                      <img
+                        key={idx}
+                        src={img}
+                        alt={product.name + ' image ' + (idx + 1)}
+                        className="h-48 w-64 object-cover rounded-lg border border-green-100 flex-shrink-0"
+                      />
+                    ))}
+                  </div>
+                </div>
                 {product.isOrganic && (
                   <span className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
                     Organic
@@ -399,9 +419,9 @@ const Marketplace = () => {
                   {product.name}
                 </h3>
                 <div className="space-y-2 text-sm text-gray-600">
-                  <p>Quantity: {product.quantity} kg</p>
+                  <p>Quantity: {product.quantity}</p>
                   <p>Location: {product.location}</p>
-                  <p>Price: ₹{product.price}/kg</p>
+                  <p>Price: {product.price}</p>
                   <p>Seller: {product.seller}</p>
                 </div>
                 <div className="mt-4 flex gap-2">
@@ -435,14 +455,14 @@ const Marketplace = () => {
             {cart.map((item) => (
               <div key={item.id} className="flex gap-2">
                 <img
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.name}
                   className="w-16 h-16 object-cover rounded"
                 />
                 <div className="flex-1">
                   <h3 className="font-medium">{item.name}</h3>
                   <p className="text-sm text-gray-600">
-                    {item.quantity} kg × ₹{item.price}
+                    {item.quantity} × ₹{item.price}
                   </p>
                 </div>
               </div>

@@ -10,7 +10,7 @@ const Weather = () => {
     current: {
       temperature: 28,
       condition: 'Sunny',
-      humidity: 65,
+    humidity: 65,
       windSpeed: 12,
       precipitation: 0,
       feelsLike: 30,
@@ -89,7 +89,7 @@ const Weather = () => {
 
   const locations = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad'];
 
-  return (
+    return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4">
       <div className="max-w-6xl mx-auto">
         {/* Location Selector */}
@@ -134,7 +134,7 @@ const Weather = () => {
           >
             7-Day
           </button>
-        </div>
+      </div>
 
         {/* Weather Alerts */}
         {weatherData.alerts.length > 0 && (
@@ -143,7 +143,7 @@ const Weather = () => {
               <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3">
                 {alert.icon}
                 <p className="text-gray-700">{alert.message}</p>
-              </div>
+            </div>
             ))}
           </div>
         )}
@@ -162,42 +162,42 @@ const Weather = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-2">
                   <Thermometer className="w-5 h-5 text-gray-600" />
-                  <div>
+            <div>
                     <p className="text-sm text-gray-600">Feels Like</p>
                     <p className="font-semibold">{weatherData.current.feelsLike}°C</p>
                   </div>
-                </div>
+            </div>
                 <div className="flex items-center gap-2">
                   <Droplets className="w-5 h-5 text-gray-600" />
-                  <div>
+            <div>
                     <p className="text-sm text-gray-600">Humidity</p>
                     <p className="font-semibold">{weatherData.current.humidity}%</p>
                   </div>
-                </div>
+            </div>
                 <div className="flex items-center gap-2">
                   <Wind className="w-5 h-5 text-gray-600" />
-                  <div>
+            <div>
                     <p className="text-sm text-gray-600">Wind</p>
                     <p className="font-semibold">{weatherData.current.windSpeed} km/h</p>
                   </div>
-                </div>
+            </div>
                 <div className="flex items-center gap-2">
                   <CloudRain className="w-5 h-5 text-gray-600" />
-                  <div>
+            <div>
                     <p className="text-sm text-gray-600">Precipitation</p>
                     <p className="font-semibold">{weatherData.current.precipitation}%</p>
-                  </div>
-                </div>
+            </div>
+          </div>
                 <div className="flex items-center gap-2">
                   <Droplet className="w-5 h-5 text-gray-600" />
-                  <div>
+              <div>
                     <p className="text-sm text-gray-600">Soil Moisture</p>
                     <p className="font-semibold">{weatherData.current.soilMoisture}%</p>
                   </div>
-                </div>
+              </div>
                 <div className="flex items-center gap-2">
                   <WindIcon className="w-5 h-5 text-gray-600" />
-                  <div>
+              <div>
                     <p className="text-sm text-gray-600">Air Quality</p>
                     <p className="font-semibold">{weatherData.current.airQuality}</p>
                   </div>
@@ -255,8 +255,8 @@ const Weather = () => {
                       <p className="text-sm text-gray-600">{crop.reason}</p>
                     </div>
                   ))}
-                </div>
-              </div>
+          </div>
+        </div>
 
               {/* Pest Alerts */}
               {weatherData.farmingAdvice.pestAlerts.length > 0 && (
@@ -266,7 +266,7 @@ const Weather = () => {
                     {weatherData.farmingAdvice.pestAlerts.map((alert, index) => (
                       <div key={index} className="flex items-start gap-3">
                         <AlertCircle className="w-5 h-5 text-yellow-500 mt-0.5" />
-                        <div>
+            <div>
                           <p className="text-gray-700">{alert.message}</p>
                           <p className="text-sm text-gray-500 mt-1">Severity: {alert.severity}</p>
                         </div>
@@ -276,7 +276,7 @@ const Weather = () => {
                 </div>
               )}
             </div>
-          </div>
+            </div>
         )}
 
         {/* Hourly Forecast */}
@@ -288,7 +288,7 @@ const Weather = () => {
                   <p className="text-gray-600 mb-2">{hour.time}</p>
                   {hour.icon}
                   <p className="font-semibold mt-2">{hour.temp}°C</p>
-                </div>
+            </div>
               ))}
             </div>
           </div>
@@ -307,9 +307,9 @@ const Weather = () => {
                   <div className="flex items-center gap-4">
                     <p className="font-semibold">{day.high}°C</p>
                     <p className="text-gray-600">{day.low}°C</p>
-                  </div>
-                </div>
-              ))}
+        </div>
+              </div>
+            ))}
             </div>
           </div>
         )}
