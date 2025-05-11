@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import Typewriter from "typewriter-effect";
 import Hero from './Hero';
 import { ShoppingCart, Users, BookOpen, TrendingUp, Leaf, Sun, Droplets, MessageCircle, X, Send, Loader2, AlertCircle, Lightbulb } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const agriFacts = [
   "India has 150M+ farmers",
@@ -74,6 +75,7 @@ const stats = [
 const tipOfTheDay = "Plant wheat 2–3 cm deep for optimal germination.";
 
 const Home = () => {
+  const { t } = useTranslation();
   const [showKrishika, setShowKrishika] = useState(false);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -134,8 +136,8 @@ const Home = () => {
               <Lightbulb className="w-8 h-8 text-yellow-400 animate-pulse" />
             </div>
             <div className="flex-1">
-              <div className="font-bold text-green-700 text-lg mb-1">Tip of the Day</div>
-              <div className="text-gray-700 text-base">{tipOfTheDay}</div>
+              <div className="font-bold text-green-700 text-lg mb-1">{t('tipOfTheDay')}</div>
+              <div className="text-gray-700 text-base">{t('tipOfTheDayText')}</div>
             </div>
             <button
               className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors"
@@ -156,7 +158,7 @@ const Home = () => {
               className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 flex items-center gap-2 group"
             >
               <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
-              <span className="font-medium">Ask Krishika</span>
+              <span className="font-medium">{t('askKrishika')}</span>
             </button>
           </Link>
         ) : (
@@ -224,25 +226,25 @@ const Home = () => {
                   to="/ai-assistant"
                   className="bg-green-50 p-2 rounded-lg text-sm text-gray-700 hover:bg-green-100 transition-colors border border-green-100"
                 >
-                  Crop Advice
+                  {t('cropAdvice')}
                 </Link>
                 <Link
                   to="/ai-assistant"
                   className="bg-green-50 p-2 rounded-lg text-sm text-gray-700 hover:bg-green-100 transition-colors border border-green-100"
                 >
-                  Market Prices
+                  {t('marketPrices')}
                 </Link>
                 <Link
                   to="/ai-assistant"
                   className="bg-green-50 p-2 rounded-lg text-sm text-gray-700 hover:bg-green-100 transition-colors border border-green-100"
                 >
-                  Weather Info
+                  {t('weatherInfo')}
                 </Link>
                 <Link
                   to="/ai-assistant"
                   className="bg-green-50 p-2 rounded-lg text-sm text-gray-700 hover:bg-green-100 transition-colors border border-green-100"
                 >
-                  Farming Tips
+                  {t('farmingTips')}
                 </Link>
               </div>
             </div>
@@ -302,9 +304,9 @@ const Home = () => {
       {/* Major Crops Section */}
       <div className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">Major Crops</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">{t('majorCrops')}</h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Discover India's diverse agricultural landscape through our major crops
+            {t('majorCropsDesc')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {majorCrops.map((crop) => (
@@ -320,12 +322,12 @@ const Home = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{crop.name}</h3>
-                  <p className="text-gray-600 mb-4">{crop.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{t(`cropName_${crop.name.toLowerCase()}`)}</h3>
+                  <p className="text-gray-600 mb-4">{t(`cropDesc_${crop.name.toLowerCase()}`)}</p>
                   <div className="space-y-2 text-sm text-gray-500">
-                    <p><span className="font-medium">Season:</span> {crop.season}</p>
-                    <p><span className="font-medium">Major States:</span> {crop.states.join(", ")}</p>
-                    <p><span className="font-medium">Average Yield:</span> {crop.yield}</p>
+                    <p><span className="font-medium">{t('season')}:</span> {t(`season_${crop.season.split(' ')[0].toLowerCase()}`)} {crop.season.includes('(') ? crop.season.match(/\(([^)]+)\)/)[1] : ''}</p>
+                    <p><span className="font-medium">{t('majorStates')}:</span> {crop.states.map(state => t(`state_${state.toLowerCase().replace(/ /g, '_')}`)).join(", ")}</p>
+                    <p><span className="font-medium">{t('averageYield')}:</span> {crop.yield}</p>
                   </div>
                 </div>
               </div>
